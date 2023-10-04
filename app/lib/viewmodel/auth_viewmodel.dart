@@ -10,9 +10,15 @@ import '../state/auth/login_state.dart';
 class AuthViewModel extends GetxController {
   String _currentScreenState = stateName.authSplashState;
   String _previousScreenState = stateName.authLoginState;
+  bool isRememberMe = false;
+
+  // Text field Controllers.
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   Widget get currentScreenState => switch (_currentScreenState) {
-        stateName.authSplashState => AuthSplashState(),
+        stateName.authSplashState => const AuthSplashState(),
+        stateName.authLoginState => const AuthLoginState(),
         _ => Container(),
       };
 
@@ -30,5 +36,10 @@ class AuthViewModel extends GetxController {
       _previousScreenState = stateName.authLoginState;
       update();
     }
+  }
+
+  void rememberMeAction() {
+    isRememberMe = !isRememberMe;
+    update([const ObjectKey('remember_me_flag')]);
   }
 }

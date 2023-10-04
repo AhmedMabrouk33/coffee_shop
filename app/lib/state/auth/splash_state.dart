@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../viewmodel/auth_viewmodel.dart';
-// import '../';
+
+import '../../routes/screen_state_name.dart' show authLoginState;
 
 class AuthSplashState extends StatelessWidget {
   const AuthSplashState({super.key});
@@ -19,16 +20,20 @@ class AuthSplashState extends StatelessWidget {
         SizedBox(
           height: MediaQuery.sizeOf(context).height * (104 / 800),
         ),
-        // TODO: This Text will get from Splash Screen repository.
+        // TODO: This Text will get from Splash Screen repository{From API}.
         Padding(
           padding: const EdgeInsets.only(left: 25, right: 24),
           child: Text(
             'Find The best coffee for You',
+            softWrap: true,
+            textScaleFactor: MediaQuery.sizeOf(context).height > 360
+                ? MediaQuery.sizeOf(context).height / 800
+                : 0.35,
+            style: Get.textTheme.displayLarge,
           ),
         ),
-        SizedBox(
-          height: MediaQuery.sizeOf(context).height * (130 / 800),
-        ),
+        const Spacer(),
+
         Image.asset(
           'assets/images/logo.png',
           // width: 200,
@@ -38,9 +43,9 @@ class AuthSplashState extends StatelessWidget {
               : MediaQuery.sizeOf(context).aspectRatio,
           // fit: BoxFit.cover,
         ),
-        SizedBox(
-          height: MediaQuery.sizeOf(context).height * (130 / 800),
-        ),
+
+        const Spacer(),
+
         Expanded(
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -48,7 +53,22 @@ class AuthSplashState extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Get.find<AuthViewModel>()
+                    .navigateToNewState(authLoginState),
+                style: Get.theme.elevatedButtonTheme.style?.copyWith(
+                  fixedSize: MaterialStatePropertyAll(
+                    Size(MediaQuery.sizeOf(context).width * (100 / 360), 50),
+                  ),
+                  foregroundColor: const MaterialStatePropertyAll(Colors.white),
+                  iconSize: const MaterialStatePropertyAll(50),
+                  shape: const MaterialStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(40.5),
+                      ),
+                    ),
+                  ),
+                ),
                 child: const Icon(Icons.arrow_right),
               ),
             ],

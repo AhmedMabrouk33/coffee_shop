@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import './utils/theme/dark_theme.dart';
+
 import './routes/app_routes.dart';
 import './routes/screen_name.dart' show authScreen;
 
@@ -12,6 +14,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: customDarkTheme,
       getPages: AppRoute.appRoutes(),
       debugShowCheckedModeBanner: false,
       title: "Coffee Application",
