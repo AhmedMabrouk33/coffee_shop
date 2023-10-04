@@ -106,6 +106,18 @@ ThemeData customDarkTheme = ThemeData(
     ),
   ),
 
+  iconButtonTheme: const IconButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStatePropertyAll(Color(0xffBA9062)),
+      foregroundColor: MaterialStatePropertyAll(Color(0xffE4D7C3)),
+      iconSize: MaterialStatePropertyAll(30),
+      shape: MaterialStatePropertyAll(CircleBorder()),
+      alignment: AlignmentDirectional.center,
+      fixedSize: MaterialStatePropertyAll(Size(20, 20)),
+      padding: MaterialStatePropertyAll(EdgeInsets.all(0)),
+    ),
+  ),
+
   checkboxTheme: const CheckboxThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(5)),
