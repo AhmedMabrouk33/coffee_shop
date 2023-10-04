@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 
 import '../viewmodel/auth_viewmodel.dart';
 
-import '../routes/screen_state_name.dart';
-
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 

@@ -14,32 +14,31 @@ import '../../utils/widgets/checkBox/custom_checkbox.dart';
 class AuthLoginState extends StatelessWidget {
   const AuthLoginState({super.key});
 
-  Path _loginStateClipPath({
-    required Size size,
-    required double containerHeight,
-    required double containerWidth,
-  }) {
+  Path _loginStateClipPath(Size size) {
     var currentPath = Path()..moveTo(0, 0);
-    currentPath.lineTo(containerWidth, 0);
+    double heightRatio = (size.height / 260);
+    double widthRatio = (size.width / 360);
+
+    currentPath.lineTo(size.width, 0);
     currentPath.cubicTo(
-      containerWidth,
-      150.61 * (containerHeight / 260),
-      316.98 * (containerWidth / 360),
-      185.5 * (containerHeight / 260),
-      249.6 * (containerWidth / 360),
-      185.5 * (containerHeight / 260),
+      size.width,
+      150.61 * heightRatio,
+      316.98 * widthRatio,
+      185.5 * heightRatio,
+      249.6 * widthRatio,
+      185.5 * heightRatio,
     );
     currentPath.lineTo(
-      112.8 * (containerWidth / 360),
-      185.5 * (containerHeight / 260),
+      112.8 * widthRatio,
+      185.5 * heightRatio,
     );
     currentPath.cubicTo(
-      70.45 * (containerWidth / 360),
-      185.5 * (containerHeight / 260),
-      0.69 * (containerWidth / 360),
-      205.34 * (containerHeight / 260),
+      70.45 * widthRatio,
+      185.5 * heightRatio,
+      0.69 * widthRatio,
+      205.34 * heightRatio,
       0,
-      containerHeight,
+      size.height,
     );
 
     currentPath.close();
@@ -60,12 +59,8 @@ class AuthLoginState extends StatelessWidget {
           height: MediaQuery.sizeOf(context).height * (260 / 800),
           width: double.infinity,
           child: ClipPath(
-            clipper: MyCustomClipper(
-              containerHeight: MediaQuery.sizeOf(context).height * (260 / 800),
-              containerWidth: MediaQuery.sizeOf(context).width,
-              clipPathFunc: _loginStateClipPath,
-            ),
-            child: _clipperChild(context),
+            clipper: MyCustomClipper(clipPathFunc: _loginStateClipPath),
+            child: _loginHeaderWidget(context),
           ),
         ),
         const SizedBox(height: 20),
@@ -80,25 +75,25 @@ class AuthLoginState extends StatelessWidget {
                   label: 'Email',
                   autoFocus: true,
                   controller: authController.emailController,
-                  autoChangeFocus: true,
                   hint: 'Email',
                   leftPadding: 23,
                   rightPadding: 13,
                   spacingBetween: 15,
                   keyboardType: TextInputType.emailAddress,
+                  onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 25 / 800).build(context),
                 LabelTextFieldWidget(
                   label: 'password',
                   autoFocus: true,
                   controller: authController.passwordController,
-                  autoChangeFocus: true,
                   hint: 'Password',
                   leftPadding: 23,
                   rightPadding: 13,
                   spacingBetween: 15,
                   keyboardType: TextInputType.visiblePassword,
                   hiddenInputText: true,
+                  onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 32 / 800).build(context),
                 _rememberMeRow(context),
@@ -122,7 +117,7 @@ class AuthLoginState extends StatelessWidget {
     );
   }
 
-  Widget _clipperChild(BuildContext context) {
+  Widget _loginHeaderWidget(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
         top: MediaQuery.sizeOf(context).height * (65 / 800),
@@ -168,7 +163,7 @@ class AuthLoginState extends StatelessWidget {
               fillBackgroundColor: const Color(0xffBA9062),
               labelStyle: const TextStyle(),
               checkboxBorderRadius: 5,
-              autoFocus: true,
+              autoFocus: false,
             );
           },
         ),
