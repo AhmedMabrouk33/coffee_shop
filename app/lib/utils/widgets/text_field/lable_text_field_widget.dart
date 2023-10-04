@@ -8,19 +8,18 @@ class LabelTextFieldWidget extends StatelessWidget {
     this.autoFocus = false,
     this.labelTextStyle,
     required this.controller,
-    required this.autoChangeFocus,
     required this.hint,
     required this.leftPadding,
     required this.rightPadding,
     required this.keyboardType,
     required this.spacingBetween,
+    required this.onEditingComplete,
   });
 
   final String label;
   final bool autoFocus;
   final TextStyle? labelTextStyle;
   final TextEditingController controller;
-  final bool autoChangeFocus;
   final String hint;
   final double leftPadding;
   final double rightPadding;
@@ -29,6 +28,7 @@ class LabelTextFieldWidget extends StatelessWidget {
 
   /// Space between label and Text field.
   final double spacingBetween;
+  final VoidCallback onEditingComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,7 @@ class LabelTextFieldWidget extends StatelessWidget {
             autofocus: autoFocus,
             controller: controller,
             keyboardType: keyboardType,
-            onEditingComplete:
-                autoChangeFocus ? () => Focus.of(context).nextFocus() : null,
+            onEditingComplete: onEditingComplete,
             decoration: InputDecoration(hintText: hint),
           ),
         ],
