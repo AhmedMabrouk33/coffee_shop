@@ -1,30 +1,16 @@
 import 'package:flutter/material.dart';
 
-typedef CustomClipperPathFunc = Path Function({
-  required Size size,
-  required double containerHeight,
-  required double containerWidth,
-});
+typedef CustomClipperPathFunc = Path Function(Size size);
 
 // class
 
 class MyCustomClipper extends CustomClipper<Path> {
-  final double containerHeight;
-  final double containerWidth;
   final CustomClipperPathFunc clipPathFunc;
 
-  const MyCustomClipper({
-    required this.containerHeight,
-    required this.containerWidth,
-    required this.clipPathFunc,
-  });
+  const MyCustomClipper({required this.clipPathFunc});
 
   @override
-  Path getClip(Size size) => clipPathFunc(
-        size: size,
-        containerHeight: containerHeight,
-        containerWidth: containerWidth,
-      );
+  Path getClip(Size size) => clipPathFunc(size);
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
