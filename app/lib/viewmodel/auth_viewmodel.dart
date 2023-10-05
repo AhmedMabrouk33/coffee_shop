@@ -7,6 +7,7 @@ import '../routes/screen_state_name.dart' as stateName;
 import '../state/auth/splash_state.dart';
 import '../state/auth/login_state.dart';
 import '../state/auth/sign_up_state.dart';
+import '../state/auth/forget_password_state.dart';
 
 class AuthViewModel extends GetxController {
   String _currentScreenState = stateName.authSplashState;
@@ -25,6 +26,7 @@ class AuthViewModel extends GetxController {
         stateName.authSplashState => const AuthSplashState(),
         stateName.authLoginState => const AuthLoginState(),
         stateName.authSignUpState => const AuthSignUpState(),
+        stateName.authForgetPasswordState => const AuthForgetPasswordState(),
         _ => Container(),
       };
 
@@ -61,5 +63,16 @@ class AuthViewModel extends GetxController {
     passwordController.clear();
     userNameController.clear();
     confirmPasswordController.clear();
+  }
+
+  /// This Function called from forget password state, @ Case:
+  /// True : Reset password state.
+  /// False: New password state.
+  ///
+  bool isShowResetPassword() {
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+    return false;
   }
 }

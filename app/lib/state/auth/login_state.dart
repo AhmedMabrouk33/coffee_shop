@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../routes/screen_state_name.dart' show authSignUpState;
+import '../../routes/screen_state_name.dart'
+    show authSignUpState, authForgetPasswordState;
 
 import '../../viewmodel/auth_viewmodel.dart';
 
@@ -169,7 +170,8 @@ class AuthLoginState extends StatelessWidget {
         ),
         const Spacer(),
         TextButton(
-          onPressed: () {},
+          onPressed: () => Get.find<AuthViewModel>()
+              .navigateToNewState(authForgetPasswordState),
           child: const Text('Forget Password?'),
         ),
         const SizedBox(width: 15),
