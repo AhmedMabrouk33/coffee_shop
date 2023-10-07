@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/widgets/text_field/label_password_text_field.dart';
 import '../../viewmodel/auth_viewmodel.dart';
 
 import '../../utils/widgets/spacing/empty_spacing.dart';
@@ -60,6 +61,7 @@ class AuthSignUpState extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
+                // ? User name textfield.
                 LabelTextFieldWidget(
                   label: 'User name',
                   controller: authController.userNameController,
@@ -72,6 +74,8 @@ class AuthSignUpState extends StatelessWidget {
                   onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 25 / 800).build(context),
+
+                // ? Email textfield.
                 LabelTextFieldWidget(
                   autoFocus: true,
                   label: 'Email',
@@ -84,7 +88,9 @@ class AuthSignUpState extends StatelessWidget {
                   onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 25 / 800).build(context),
-                LabelTextFieldWidget(
+
+                // ? Password textfield.
+                LabelPasswordTextFieldWidget(
                   autoFocus: true,
                   label: 'Password',
                   controller: authController.passwordController,
@@ -97,7 +103,9 @@ class AuthSignUpState extends StatelessWidget {
                   onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 25 / 800).build(context),
-                LabelTextFieldWidget(
+
+                // ? Confirm password textfield.
+                LabelPasswordTextFieldWidget(
                   autoFocus: true,
                   label: 'Confirm Password',
                   controller: authController.confirmPasswordController,
@@ -110,6 +118,8 @@ class AuthSignUpState extends StatelessWidget {
                   onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 25 / 800).build(context),
+
+                // ? Sign up Elevated button.
                 ElevatedButton(
                   // autofocus: true,
                   onPressed: () {},
@@ -301,31 +311,3 @@ class AuthSignUpState extends StatelessWidget {
     );
   }
 }
-/*
-  Positioned(
-    child: SizedBox(
-      width: MediaQuery.sizeOf(context).width,
-      child: InkWell(
-        onTap: () => print('Clipper pressed'),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const EmptySpacingWidget(widthRatio: 38 / 360)
-                .build(context),
-            Text('data')
-            // IconButton(
-            //   onPressed: () {},
-            //   style: Get.theme.iconButtonTheme.style?.copyWith(
-            //     iconColor: MaterialStatePropertyAll((Colors.amber)),
-            //     fixedSize: MaterialStatePropertyAll(Size(50, 50)),
-            //   ),
-            //   icon: const Icon(Icons.label),
-            // ),
-          ],
-        ),
-      ),
-    ),
-  ),
-*/

@@ -8,9 +8,10 @@ import '../../viewmodel/auth_viewmodel.dart';
 
 // Custom Widgets.
 import '../../utils/widgets/spacing/empty_spacing.dart';
-import '../../utils/widgets/custom_clipper/custom_clipper_widget.dart';
-import '../../utils/widgets/text_field/lable_text_field_widget.dart';
 import '../../utils/widgets/checkBox/custom_checkbox.dart';
+import '../../utils/widgets/text_field/lable_text_field_widget.dart';
+import '../../utils/widgets/custom_clipper/custom_clipper_widget.dart';
+import '../../utils/widgets/text_field/label_password_text_field.dart';
 
 class AuthLoginState extends StatelessWidget {
   const AuthLoginState({super.key});
@@ -72,6 +73,7 @@ class AuthLoginState extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
+                // ? Email Text field.
                 LabelTextFieldWidget(
                   label: 'Email',
                   autoFocus: true,
@@ -84,7 +86,9 @@ class AuthLoginState extends StatelessWidget {
                   onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 25 / 800).build(context),
-                LabelTextFieldWidget(
+
+                // ? Password Text field.
+                LabelPasswordTextFieldWidget(
                   label: 'password',
                   autoFocus: true,
                   controller: authController.passwordController,
@@ -97,10 +101,14 @@ class AuthLoginState extends StatelessWidget {
                   onEditingComplete: () => Get.focusScope!.nextFocus(),
                 ),
                 const EmptySpacingWidget(heightRatio: 32 / 800).build(context),
+
+                // ? Remember me Row.
                 _rememberMeRow(context),
                 const EmptySpacingWidget(heightRatio: 65 / 800).build(context),
+
+                // ? Login Elevated button.
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: Get.find<AuthViewModel>().loginAction,
                   style: Get.theme.elevatedButtonTheme.style?.copyWith(
                     fixedSize: MaterialStatePropertyAll(
                       Size(MediaQuery.sizeOf(context).width * (254 / 360), 51),
@@ -109,6 +117,8 @@ class AuthLoginState extends StatelessWidget {
                   child: const Text('Login'),
                 ),
                 const EmptySpacingWidget(heightRatio: 86 / 800).build(context),
+
+                // ? Sign up Row.
                 _signUpRowWidgets,
               ],
             ),

@@ -1,10 +1,12 @@
-import 'package:app/utils/widgets/custom_clipper/custom_clipper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../viewmodel/auth_viewmodel.dart';
+
 import '../../utils/widgets/spacing/empty_spacing.dart';
 import '../../utils/widgets/text_field/lable_text_field_widget.dart';
-import '../../viewmodel/auth_viewmodel.dart';
+import '../../utils/widgets/custom_clipper/custom_clipper_widget.dart';
+import '../../utils/widgets/text_field/label_password_text_field.dart';
 
 class AuthForgetPasswordState extends StatelessWidget {
   const AuthForgetPasswordState({super.key});
@@ -164,7 +166,7 @@ class AuthForgetPasswordState extends StatelessWidget {
         style: Get.textTheme.displayLarge,
       ),
       const EmptySpacingWidget(heightRatio: 26 / 800).build(context),
-      LabelTextFieldWidget(
+      LabelPasswordTextFieldWidget(
         label: 'Password',
         controller: Get.find<AuthViewModel>().passwordController,
         hint: 'Password',
@@ -177,7 +179,7 @@ class AuthForgetPasswordState extends StatelessWidget {
         hiddenInputText: true,
       ),
       const SizedBox(height: 25),
-      LabelTextFieldWidget(
+      LabelPasswordTextFieldWidget(
         label: 'Confirm password',
         controller: Get.find<AuthViewModel>().confirmPasswordController,
         hint: 'Confirm password',
