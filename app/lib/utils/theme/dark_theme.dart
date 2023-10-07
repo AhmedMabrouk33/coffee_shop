@@ -50,6 +50,7 @@ ThemeData customDarkTheme = ThemeData(
       height: 1,
       color: Color(0xff5B5B5B),
     ),
+    suffixIconColor: Colors.white,
   ),
 
   // Buttons.
@@ -126,5 +127,19 @@ ThemeData customDarkTheme = ThemeData(
     ),
     fillColor: MaterialStatePropertyAll(Color(0xffBA9062)),
     checkColor: MaterialStatePropertyAll(Color(0xff19335A)),
+  ),
+
+  snackBarTheme: const SnackBarThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(45),
+      ),
+    ),
+    contentTextStyle: TextStyle(
+      // color: Color(0xff19335A),
+      color: Color(0xffE4D7C3),
+    ),
+    elevation: 10,
+    backgroundColor: Color.fromARGB(140, 220, 57, 95),
   ),
 );
