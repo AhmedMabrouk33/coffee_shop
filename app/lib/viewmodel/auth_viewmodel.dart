@@ -15,6 +15,8 @@ class AuthViewModel extends GetxController {
   String _currentScreenState = state_name.authSplashState;
   String _previousScreenState = state_name.authLoginState;
   bool isRememberMe = false;
+  
+  // TODO: Remove this attribute and send auth repository with it's services class.
   final bool isTest;
 
   // late final AuthRepository _authRepository;

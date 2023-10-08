@@ -6,6 +6,9 @@ import './utils/theme/dark_theme.dart';
 import './routes/app_routes.dart';
 import './routes/screen_name.dart' show authScreen;
 
+import './utils/api/api_services.dart';
+import './services/endpoints/api_endpoint.dart' show baseUrlAPI;
+
 void main() => runApp(const MainApp());
 
 class MainApp extends StatelessWidget {
@@ -13,6 +16,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ApiServices.initialize(baseUrlAPI);
     return GetMaterialApp(
       theme: customDarkTheme,
       getPages: AppRoute.appRoutes(),
