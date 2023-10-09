@@ -1,14 +1,20 @@
 import './error_exception.dart';
 
-class RequiredException extends ErrorException {
-  const RequiredException({required super.errorMessage});
+class RequiredException implements ErrorException {
+  final String errorMessage;
+  const RequiredException({required this.errorMessage});
 
   @override
   String get errorExceptionMessage => 'Required $errorMessage field';
+
+  // @override
+  // // TODO: implement errorMessage
+  // // String get errorMessage => throw UnimplementedError();
 }
 
-class ValidationPasswordException extends ErrorException {
-  const ValidationPasswordException({required super.errorMessage});
+class ValidationPasswordException implements ErrorException {
+  final String errorMessage;
+  const ValidationPasswordException({required this.errorMessage});
 
   @override
   String get errorExceptionMessage => 'Error in Password is $errorMessage';

@@ -8,6 +8,7 @@ import '../state/auth/login_state.dart';
 import '../state/auth/sign_up_state.dart';
 import '../state/auth/forget_password_state.dart';
 
+import '../services/auth_services.dart';
 import '../repositories/auth_repository.dart';
 import '../utils/exception/error_exception.dart';
 
@@ -15,20 +16,34 @@ class AuthViewModel extends GetxController {
   String _currentScreenState = state_name.authSplashState;
   String _previousScreenState = state_name.authLoginState;
   bool isRememberMe = false;
-  
-  // TODO: Remove this attribute and send auth repository with it's services class.
-  final bool isTest;
 
   // late final AuthRepository _authRepository;
   late final AuthRepository _authRepository;
 
-  AuthViewModel({this.isTest = false});
+  AuthViewModel({
+    AuthServicesAbstract? authServicesAbstract,
+  }) {
+    _authRepository = authServicesAbstract == null
+        ? const AuthRepository()
+        : AuthRepository(authServicesAbstract: authServicesAbstract);
+  }
 
   @override
   void onInit() {
+    print('Is flutter Test mode ${Get.testMode}');
     print('Init state is run');
-    _authRepository = !isTest ? const AuthRepository() : const AuthRepository();
+    // _authRepository = !isTest ? const AuthRepository() : const AuthRepository();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    userNameController.dispose();
+    confirmPasswordController.dispose();
+
+    super.dispose();
   }
 
   // Text field Controllers.
@@ -82,6 +97,7 @@ class AuthViewModel extends GetxController {
     confirmPasswordController.clear();
   }
 
+  ///
   /// This Function called from forget password state, @ Case:
   /// True : Reset password state.
   /// False: New password state.
@@ -101,7 +117,7 @@ class AuthViewModel extends GetxController {
         isRememberMe: isRememberMe,
       );
     } on ErrorException catch (error) {
-      if (!isTest) {
+      if (Get.testMode == false) {
         _showErrorSnackBar(error.errorExceptionMessage);
       } else {
         rethrow;
@@ -110,24 +126,24 @@ class AuthViewModel extends GetxController {
   }
 
   void _showErrorSnackBar(String message) async {
-    if (!isTest) {
-      // Get.closeAllSnackbars();
-      ScaffoldMessenger.of(Get.context!).removeCurrentSnackBar();
+    // if (!isTest) {
+    // Get.closeAllSnackbars();
+    ScaffoldMessenger.of(Get.context!).removeCurrentSnackBar();
 
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(
-            SnackBar(
-              duration: const Duration(seconds: 3),
-              padding: const EdgeInsets.only(
-                  left: 40, right: 15, top: 10, bottom: 5),
-              dismissDirection: DismissDirection.up,
-              content: Text(message),
-            ),
-          )
-          .closed
-          .then((value) => print('Closed snack bar'));
-    } else {
-      throw message;
-    }
+    ScaffoldMessenger.of(Get.context!)
+        .showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 3),
+            padding:
+                const EdgeInsets.only(left: 40, right: 15, top: 10, bottom: 5),
+            dismissDirection: DismissDirection.up,
+            content: Text(message),
+          ),
+        )
+        .closed
+        .then((value) => print('Closed snack bar'));
+    // } else {
+    //   throw message;
+    // }
   }
 }

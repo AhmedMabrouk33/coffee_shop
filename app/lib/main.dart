@@ -9,8 +9,21 @@ import './routes/screen_name.dart' show authScreen;
 import './utils/api/api_services.dart';
 import './services/endpoints/api_endpoint.dart' show baseUrlAPI;
 
-void main() => runApp(const MainApp());
+void main() {
+  ApiServices.initialize(baseUrlAPI);
+  // runApp(const MainApp());
+  runApp(
+    GetMaterialApp(
+      theme: customDarkTheme,
+      getPages: AppRoute.appRoutes(),
+      debugShowCheckedModeBanner: false,
+      title: "Coffee Application",
+      initialRoute: authScreen,
+    ),
+  );
+}
 
+/*
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
@@ -25,4 +38,4 @@ class MainApp extends StatelessWidget {
       initialRoute: authScreen,
     );
   }
-}
+}*/
