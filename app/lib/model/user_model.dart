@@ -45,4 +45,27 @@ class UserModel {
   String toString() {
     return 'UserModel(id: $id, userName: $userName, email: $email, password: $password, resetPassword: $resetPassword, image: $image)';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+  
+    return other is UserModel &&
+      other.id == id &&
+      other.userName == userName &&
+      other.email == email &&
+      other.password == password &&
+      other.resetPassword == resetPassword &&
+      other.image == image;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      userName.hashCode ^
+      email.hashCode ^
+      password.hashCode ^
+      resetPassword.hashCode ^
+      image.hashCode;
+  }
 }

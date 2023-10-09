@@ -11,7 +11,7 @@ void main() {
 
     setUp(() {
       Get.testMode = true;
-      authController = Get.put(AuthViewModel(isTest: true));
+      authController = Get.put(AuthViewModel());
     });
 
     tearDown(() => Get.delete<AuthViewModel>());
