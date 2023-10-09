@@ -1,16 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 
 import '../../../../lib/services/auth_services.dart';
 import '../../../../lib/utils/api/api_services.dart';
 import '../../../../lib/utils/exception/network_exception.dart';
+
+const String errorEmail = 'errorexception@email.com';
 
 class AuthServicesOfflineImplement implements AuthServicesAbstract {
   @override
   Future<ApiReturnType> loginServices(
       {required String email, required String password}) async {
     await Future.delayed(const Duration(seconds: 3));
-    if (email.isEmail) {
+    if (email != errorEmail) {
       return <String, dynamic>{
         "id": 1,
         "username": "junk",
@@ -43,9 +44,8 @@ class AuthServicesOfflineImplement implements AuthServicesAbstract {
 }
 
 void main() {
-  group('Auth Services test cases',() {
+  group('Auth Services test cases', () {
     final AuthServicesAbstract offlineServices = AuthServicesOfflineImplement();
-
 
     test('Test Accepted login Method with dummy user name and password',
         timeout: const Timeout(Duration(minutes: 1)), () async {
@@ -77,7 +77,7 @@ void main() {
         timeout: const Timeout(Duration(minutes: 1)), () async {
       offlineServices
           .loginServices(
-            email: 'junk',
+            email: errorEmail,
             password: 'Password1234',
           )
           .then(
