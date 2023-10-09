@@ -2,20 +2,40 @@ import 'package:get/get.dart';
 
 import '../utils/exception/auth_exception.dart';
 
+import '../services/auth_services.dart';
+
+import '../model/user_model.dart';
+
 class AuthRepository {
-  const AuthRepository();
+  const AuthRepository({
+    this.authServicesAbstract =  const AuthServicesImplement(),
+  });
+
+  final AuthServicesAbstract authServicesAbstract;
 
   Future<void> loginAction({
     required String email,
     required String password,
     required bool isRememberMe,
   }) async {
+    late Map<String, dynamic> userData;
     try {
       _validateEmail(email);
       _validatePassword(password);
+
+      // final Map<String, dynamic> userData =
+      // TODO:
+      userData = await authServicesAbstract.loginServices(
+        email: email,
+        password: password,
+      );
+
+      // This Method read user data and products.
     } catch (e) {
+      print(e);
       rethrow;
     }
+    print(UserModel.fromJson(userData, password)..toString());
   }
 
   void _validateEmail(String email) {
