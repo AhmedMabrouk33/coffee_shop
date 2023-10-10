@@ -7,6 +7,8 @@ import '../../../../lib/utils/exception/network_exception.dart';
 const String errorEmail = 'errorexception@email.com';
 
 class AuthServicesOfflineImplement implements AuthServicesAbstract {
+  const AuthServicesOfflineImplement();
+
   @override
   Future<ApiReturnType> loginServices(
       {required String email, required String password}) async {
@@ -45,7 +47,7 @@ class AuthServicesOfflineImplement implements AuthServicesAbstract {
 
 void main() {
   group('Auth Services test cases', () {
-    final AuthServicesAbstract offlineServices = AuthServicesOfflineImplement();
+    const AuthServicesAbstract offlineServices = AuthServicesOfflineImplement();
 
     test('Test Accepted login Method with dummy user name and password',
         timeout: const Timeout(Duration(minutes: 1)), () async {
