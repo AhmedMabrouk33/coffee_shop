@@ -6,7 +6,7 @@ import './utils/theme/dark_theme.dart';
 import './routes/app_routes.dart';
 import './routes/screen_name.dart' show authScreen;
 
-import './utils/api/api_services.dart';
+import './utils/services/api_services.dart';
 import './services/endpoints/api_endpoint.dart' show baseUrlAPI;
 
 void main() {

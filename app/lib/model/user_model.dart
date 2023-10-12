@@ -1,7 +1,7 @@
 // TODO: Create Abstract class which will be parent for all model classes
 // Class will create in utils.
 
-// TODO: UserModel will extends from model abstract class. 
+// TODO: UserModel will extends from model abstract class.
 class UserModel {
   final String id;
   final String userName;
@@ -19,7 +19,18 @@ class UserModel {
     required this.image,
   });
 
-  Map<String, dynamic> toMap() {
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      id: map['id'].toString(),
+      userName: map['username'] ?? '',
+      email: map['email'] ?? '',
+      password: map['password'] ?? '',
+      resetPassword: map['resetppassword'] ?? false,
+      image: map['image'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'username': userName,

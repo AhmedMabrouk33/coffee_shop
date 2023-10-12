@@ -8,19 +8,31 @@ import '../model/user_model.dart';
 
 class AuthRepository {
   const AuthRepository({
-    this.authServicesAbstract =  const AuthServicesImplement(),
+    this.authServicesAbstract = const AuthServicesImplement(),
   });
 
   final AuthServicesAbstract authServicesAbstract;
   // ** Auto Login.
   
 
-  Future<void> loginAction({
+  Future<UserModel?> autoLogin() async {
+    try {
+      // TODO: Call 
+      return await authServicesAbstract.autoLoginServices().then(
+        (response) {
+          return UserModel.fromJson(response, response['password']);
+        },
+      );
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> loginAction({
     required String email,
     required String password,
     required bool isRememberMe,
   }) async {
-    late Map<String, dynamic> userData;
     try {
       // Validate Email, and password.
       _validateEmail(email);
@@ -34,17 +46,23 @@ class AuthRepository {
 
       // final Map<String, dynamic> userData =
       // TODO:
-      userData = await authServicesAbstract.loginServices(
+      return await authServicesAbstract
+          .loginServices(
         email: email,
         password: password,
+        saveFlag: isRememberMe,
+      )
+          .then(
+        (authResponse) {
+          // TODO: Call Save Local FUNC. from Account Services.
+          return UserModel.fromJson(authResponse, password);
+        },
       );
-
-      // This Method read user data and products.
     } catch (e) {
+      // PRINT: Print error message from login action.
       print(e);
       rethrow;
     }
-    print(UserModel.fromJson(userData, password)..toString());
   }
 
   void _validateEmail(String email) {
