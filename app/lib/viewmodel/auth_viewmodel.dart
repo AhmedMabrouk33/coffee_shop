@@ -30,9 +30,11 @@ class AuthViewModel extends GetxController {
 
   @override
   void onInit() {
+    // PRINT: Check If Auth-viewModel run in test-mode or not.
     print('Is flutter Test mode ${Get.testMode}');
-    print('Init state is run');
-    // _authRepository = !isTest ? const AuthRepository() : const AuthRepository();
+
+    // TODO: Call function from repository to check if there is user data saved or not in local memory.
+
     super.onInit();
   }
 
@@ -62,7 +64,7 @@ class AuthViewModel extends GetxController {
         _ => Container(),
       };
 
-  // FIXME: Error @ Navigte and Pop State
+  // BUG: Error @ Navigte and Pop State
   void navigateToNewState(String newState) {
     if (newState == state_name.authSignUpState) {
       _clearTextFieldController();
@@ -72,7 +74,9 @@ class AuthViewModel extends GetxController {
     update();
   }
 
-  // FIXME: Error @ Navigte and Pop State
+  // TODO: Add private function which will replace current state.
+
+  // BUG: Error @ Navigte and Pop State
   void popCurrentState() {
     if (_currentScreenState == state_name.authSplashState ||
         _currentScreenState == state_name.authLoginState) {
@@ -111,6 +115,8 @@ class AuthViewModel extends GetxController {
 
   Future<void> loginAction() async {
     try {
+      // PRINT: lOGIN action is Called.
+      print('Login Action is called');
       await _authRepository.loginAction(
         email: emailController.text.trim().toLowerCase(),
         password: passwordController.text.trim(),
