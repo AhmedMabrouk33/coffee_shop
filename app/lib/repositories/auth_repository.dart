@@ -12,6 +12,8 @@ class AuthRepository {
   });
 
   final AuthServicesAbstract authServicesAbstract;
+  // ** Auto Login.
+  
 
   Future<void> loginAction({
     required String email,
@@ -20,8 +22,15 @@ class AuthRepository {
   }) async {
     late Map<String, dynamic> userData;
     try {
+      // Validate Email, and password.
       _validateEmail(email);
       _validatePassword(password);
+
+      // await Get user bearer.
+      // ? Convert auth local.
+      // await  Get user data {API}.
+      // convert.
+      // Save to shared prefrances {Account Services}
 
       // final Map<String, dynamic> userData =
       // TODO:
